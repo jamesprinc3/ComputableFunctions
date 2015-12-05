@@ -1,3 +1,5 @@
+module Encoder where
+
 import Defs
 
 toSinglePair :: Int -> Pair
