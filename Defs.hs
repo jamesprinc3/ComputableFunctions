@@ -5,7 +5,6 @@ instance Show Pair where
   show (SB a b) = "<" ++ (show a) ++ "," ++ (show b) ++ ">"
   show (DB a b) = "<<" ++ (show a) ++ "," ++ (show b) ++ ">>"
 
-
 data Label = L Int
 
 instance Show Label where
