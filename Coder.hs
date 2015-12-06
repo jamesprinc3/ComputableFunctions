@@ -3,9 +3,7 @@ module Coder where
 import Defs
 
 toSinglePair :: Int -> Pair
-toSinglePair x = toSinglePair' b
-  where
-    (Bin b) = decToRevBin x
+toSinglePair = toSinglePair' . toString . decToRevBin
 
 toSinglePair' :: String -> Pair
 toSinglePair' str = SB (I x) (I y)
@@ -13,14 +11,11 @@ toSinglePair' str = SB (I x) (I y)
     strlen = (length str)
     xstrip = dropWhile ((==) '1') str
     x      = strlen - (length xstrip)
-    ybinr  = drop 1 xstrip
-    y      = binToDec (reverse ybinr)
+    y      = binToDec . reverse . tail $ xstrip
 
 
 toDoublePair :: Int -> Pair
-toDoublePair x = toDoublePair' b
-  where
-    (Bin b) = decToRevBin x
+toDoublePair = toDoublePair' . toString . decToRevBin
 
 toDoublePair' :: String -> Pair
 toDoublePair' str = DB (I x) (I y)
@@ -28,8 +23,7 @@ toDoublePair' str = DB (I x) (I y)
     strlen = (length str)
     xstrip = dropWhile ((==) '0') str
     x      = strlen - (length xstrip)
-    ybinr  = drop 1 xstrip
-    y      = binToDec (reverse ybinr)
+    y      = binToDec . reverse . tail $ xstrip
 
 
 pairToInt :: Pair -> Int

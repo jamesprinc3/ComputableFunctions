@@ -28,7 +28,7 @@ type Line = (Label, Instr)
 --instance of Show Line where
 --  show (l, i) = (show l) ++ ": " ++ (show i) 
 
-data Binary = Bin String
+newtype Binary = Bin {toString :: String}
 
 instance Show Binary where
   show (Bin s) = "0b" ++ s
