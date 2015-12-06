@@ -1,4 +1,4 @@
-module Encoder where
+module Coder where
 
 import Defs
 
@@ -35,3 +35,27 @@ toDoublePair' str = DB x y
 pairToInt :: Pair -> Int
 pairToInt (DB x y) = (2^x)*(2*y+1)
 pairToInt (SB x y) = (2^x)*(2*y+1) - 1
+
+
+listToInt :: List -> Int
+listToInt Empty = 0
+listToInt (Li x (Ad l)) = (2^x)*(2*y+1)
+  where
+    y = listToInt l
+
+
+intToList :: Int -> List
+intToList i = intToList' x
+  where
+    Bin x = decToRevBin i
+
+
+intToList' :: String -> List
+intToList' str = Li x (Ad l)
+  where
+    x = length (takeWhile ((==) '0') str)
+    l = intToList' (drop 1 (dropWhile ((==) '0') str))
+
+
+
+

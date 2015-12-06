@@ -32,6 +32,9 @@ data Binary = Bin String
 instance Show Binary where
   show (Bin s) = "0b" ++ s
 
+data Addr = Ad List
+
+data List = Empty | Li Int Addr
 
 -- <<x, y>> = 2^x(2y+1)
 -- <x, y>   = 2^x(2y+1) - 1
