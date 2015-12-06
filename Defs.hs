@@ -3,8 +3,9 @@ module Defs where
 import Data.Char
 import Data.List
 
-data Pair = SB Int Int   -- <Int, Int>
-          | DB Int Int   -- <<Int, Int>>
+data Pair = I Int
+          | SB Pair Pair   -- <Int, Int>
+          | DB Pair Pair   -- <<Int, Int>>
 
 instance Show Pair where 
   show (SB a b) = "<" ++ (show a) ++ "," ++ (show b) ++ ">"
@@ -22,19 +23,21 @@ instance Show Instr where
   show (RPLUS a l) = "R" ++ (show a) ++ "+, " ++ (show l)
   show (RMINUS a l l') = "R" ++ (show a) ++ "-, " ++ (show l) ++ ", " ++ (show l')
 
-data Line = X Label Instr
+type Line = (Label, Instr)
 
-instance Show Line where
-  show (X l i) = (show l) ++ ": " ++ (show i) 
+--instance of Show Line where
+--  show (l, i) = (show l) ++ ": " ++ (show i) 
 
 data Binary = Bin String
 
 instance Show Binary where
   show (Bin s) = "0b" ++ s
 
-data Addr = Ad List
+data Addr = Ad Int
 
-data List = Empty | Li Int Addr
+type List = [Addr]
+
+type Program = [Line]
 
 -- <<x, y>> = 2^x(2y+1)
 -- <x, y>   = 2^x(2y+1) - 1
