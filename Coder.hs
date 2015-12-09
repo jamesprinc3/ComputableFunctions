@@ -46,6 +46,7 @@ intToList i = intToList' x
 
 
 intToList' :: String -> List
+intToList' []  = []
 intToList' str = (Ad x):xs
   where
     x = length (takeWhile ((==) '0') str)
@@ -75,7 +76,6 @@ intToProg i = zip [(L n) | n <- [0..leng]] (map (intToInstr . toInt) xs)
   where
     xs   = intToList i
     leng = length xs
-
 
 
 intToInstr :: Int -> Instr
