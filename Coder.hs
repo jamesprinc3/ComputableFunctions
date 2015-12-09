@@ -57,6 +57,7 @@ progToInt :: Program -> Int
 progToInt ps = (listToInt (progToInt' ps))
 
 progToInt' :: Program -> List
+progToInt' [] = []
 progToInt' ((l, HALT):ls)          = (Ad 0):(progToInt' ls)
 progToInt' ((l, RPLUS i (L j)):ls) = (Ad body):(progToInt' ls)
   where
@@ -64,6 +65,40 @@ progToInt' ((l, RPLUS i (L j)):ls) = (Ad body):(progToInt' ls)
 progToInt' ((l, RMINUS i (L j) (L k)):ls) = (Ad body):(progToInt' ls)
   where
     body = pairToInt (DB (I (2*i+1)) (SB (I j) (I k)))
+
+-- L0: R0 L0 L2
+-- L1: HALT
+
+intToProg :: Int -> Program
+intToProg i = zip [L n | n <- [0..leng]] (map (intToInstr . toInt) xs)
+  where
+    xs   = intToList i
+    leng = length xs
+
+
+
+intToInstr :: Int -> Instr
+intToInstr 0 = HALT
+intToInstr x
+  |y `mod` 2 == 0 = RPLUS i (L z)
+  |otherwise      = RMINUS i (L j) (L k)
+    where
+      DB a b = (toDoublePair x)
+      y      = pairToInt a
+      z      = pairToInt b 
+      i      = y `div` 2
+      SB c d = (toSinglePair z)
+      j      = pairToInt c
+      k      = pairToInt d 
+
+
+
+
+
+
+
+
+
 
 
 

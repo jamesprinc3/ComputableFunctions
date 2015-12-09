@@ -33,7 +33,9 @@ newtype Binary = Bin {toString :: String}
 instance Show Binary where
   show (Bin s) = "0b" ++ s
 
-data Addr = Ad Int
+--data Addr = Ad Int
+
+newtype Addr = Ad {toInt :: Int}
 
 type List = [Addr]
 
