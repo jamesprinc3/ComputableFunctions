@@ -37,6 +37,9 @@ instance Show Binary where
 
 newtype Addr = Ad {toInt :: Int}
 
+instance Show Addr where 
+  show (Ad a) = (show a)
+
 type List = [Addr]
 
 type Program = [Line]

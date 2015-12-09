@@ -70,7 +70,8 @@ progToInt' ((l, RMINUS i (L j) (L k)):ls) = (Ad body):(progToInt' ls)
 -- L1: HALT
 
 intToProg :: Int -> Program
-intToProg i = zip [L n | n <- [0..leng]] (map (intToInstr . toInt) xs)
+--intToProg i = zip (repeat (L 0)) (map (intToInstr . toInt) xs)
+intToProg i = zip [(L n) | n <- [0..leng]] (map (intToInstr . toInt) xs)
   where
     xs   = intToList i
     leng = length xs
