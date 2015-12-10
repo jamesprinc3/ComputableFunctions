@@ -93,10 +93,14 @@ intToInstr x
       k      = pairToInt d 
 
 
+instrToInt :: Instr -> Int
+instrToInt HALT                   = 0
+instrToInt (RPLUS i (L j))        = pairToInt (DB (I i) (I j))
+instrToInt (RMINUS i (L j) (L k)) = pairToInt (DB (I i) (SB (I j) (I k)))
 
 
-
-
+-- Answer to 1c given by: map (instrToInt . snd)  p
+-- [46,0,286,1150,0,1]
 
 
 

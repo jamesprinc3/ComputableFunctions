@@ -58,3 +58,14 @@ decToRevBin' y = (intToDigit b):(decToRevBin' a)
 
 binToDec :: String -> Int
 binToDec = foldl' (\acc x -> acc * 2 + digitToInt x) 0
+
+
+-- for Q1b
+p = [(L 0, RMINUS 1 (L 2) (L 1)),
+     (L 1, HALT),
+     (L 2, RMINUS 1 (L 3) (L 4)),
+     (L 3, RMINUS 1 (L 5) (L 4)),
+     (L 4, HALT),
+     (L 5, RPLUS 0 (L 0))
+    ]
+
