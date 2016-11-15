@@ -4,12 +4,6 @@ import Control.Exception (evaluate)
 import Coder
 import Defs
 
--- instance Arbitrary Pair where
---    arbitrary = do
---      x <- arbitrary
---      y <- arbitrary
---      return $ Pt x y
-
 geni :: Gen Pair
 geni = do
   x <- arbitrary
@@ -48,24 +42,9 @@ main = hspec $ do
     -- it "Converts a Pair = Int | <x,y> | <<x,y>> to an integer" $ property $
     --   \(p :: Pair) -> (pairToInt p) == (x :: Integer) where (I x) = p
 
-
-
-
   -- describe "pairToInt" $ do
   --   it "Converts a Pair = Int | <x,y> | <<x,y>> to an integer" $ property $
   --     \
   -- describe "toSinglePair" $ do
   --   it "Converts from integer z = (2^x)*(2y + 1)−1 -> <x,y>" $ property $
   --     \x -> toSinglePair x == (x :: Int)
-
-
-
-
-    -- it "returns the first element of a list" $ do
-    --   head [23 ..] `shouldBe` (23 :: Int)
-
-    -- it "returns the first element of an *arbitrary* list" $
-    --   property $ \x xs -> head (x:xs) == (x :: Int)
-
-    -- it "throws an exception if used with an empty list" $ do
-    --   evaluate (head []) `shouldThrow` anyException
