@@ -4,10 +4,11 @@ import Data.Char
 import Data.List
 
 data Pair = I Integer
-          | SB Pair Pair   -- <Int, Integer>
-          | DB Pair Pair   -- <<Int, Integer>>
+          | SB Pair Pair   -- <Integer, Integer>
+          | DB Pair Pair   -- <<Integer, Integer>>
 
 instance Show Pair where 
+  show (I x)    = (show x)
   show (SB a b) = "<" ++ (show a) ++ "," ++ (show b) ++ ">"
   show (DB a b) = "<<" ++ (show a) ++ "," ++ (show b) ++ ">>"
 
@@ -44,18 +45,25 @@ type List = [Addr]
 
 type Program = [Line]
 
+data Register = Reg Integer
+
+type Config = (Label, [Register])
+
 -- <<x, y>> = 2^x(2y+1)
 -- <x, y>   = 2^x(2y+1) - 1
 
+-- Integer -> Reverse binary string, useful for processing in this exercise
 decToRevBin :: Integer -> Binary
 decToRevBin x = Bin (decToRevBin' x)
 
+-- TODO: remove use of String
 decToRevBin' :: Integer -> String
 decToRevBin' 0 = []
 decToRevBin' y = ((intToDigit . fromInteger) b):(decToRevBin' a)
   where 
     (a,b) = quotRem y 2
 
+-- binary string to base 10 Integer
 binToDec :: String -> Integer
 binToDec = foldl' (\acc x -> acc * 2 + (toInteger . digitToInt) x) 0
 
@@ -69,7 +77,7 @@ p = [(L 0, RMINUS 1 (L 2) (L 1)),
      (L 5, RPLUS 0 (L 0))
     ]
 -- Answer to Q1c given by: map (instrToInt . snd)  p
--- [46,0,286,1150,0,1]
+-- [184,0,1144,4600,0,1]
 
 -- for Q2
 n :: Integer
